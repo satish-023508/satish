@@ -86,8 +86,44 @@ public class UNF_simple_POM {
 	   private WebElement OrderStatus;
 	   
 	   @FindBy(xpath="//table[@class='table table-bordered table-hover']/tbody/tr[2]/td[1]/input[@type='checkbox']")
-		private WebElement select2ndcheckbox;	   
-	
+		private WebElement select2ndcheckbox;
+	   
+	   @FindBy(xpath="//table[@class='table table-bordered table-hover']/tbody/tr[3]/td[1]/input[@type='checkbox']")
+		private WebElement select3rdcheckbox;
+	   
+	   @FindBy(xpath="//table[@class='table table-bordered table-hover']/tbody/tr[4]/td[1]/input[@type='checkbox']")
+		private WebElement select4thcheckbox;
+	   
+	   @FindBy(xpath="//table[@class='table table-bordered table-hover']/tbody/tr[2]/td[6]/span[@class='label label-success']")
+		private WebElement gettheqty;
+	   
+	   @FindBy(xpath="//table[@class='table table-bordered table-hover']/tbody/tr[2]/td[8]/a")
+		private WebElement select2ndeditbtn;
+	   
+	   @FindBy(linkText="Data")
+	   private WebElement datatab;
+	   
+	   @FindBy(id="input-quantity")
+		private WebElement inputqty;
+	   
+	   @FindBy(xpath="//i[@class='fa fa-save']")
+		private WebElement SaveBtn;
+	   
+	   @FindBy(xpath="//i[@class='fa fa-shopping-cart fa-fw']")
+		private WebElement CartBtn;
+	   
+	   @FindBy(linkText="Orders")
+		private WebElement Orders;
+	   
+	   @FindBy(xpath="//table[@class='table table-bordered table-hover']/tbody/tr[8]/td[8]/a")
+		private WebElement selectViewbtn;
+	   
+	   @FindBy(id="button-invoice")
+		private WebElement InvoiceBtn;
+	   
+	   @FindBy(id="invoice")
+		private WebElement InvoiceTxt;
+	   
 	
 	
 	public void sendUserName(String Username) {
@@ -194,7 +230,64 @@ public class UNF_simple_POM {
     	Select orderstatus = new Select(OrderStatus);
     	orderstatus.selectByValue("5");
 	}
+    
+    public void GetQty() {
+    	System.out.println("Qty before editing"+" = "+ this.gettheqty.getText());
+	}
+    
+    public void clickeditbtn() {
+		this.select2ndeditbtn.click();
+	}
 	
+    public void editqty(String Qty) {
+		this.datatab.click();
+		this.inputqty.clear();
+		this.inputqty.sendKeys(Qty);
+	}
+    
+    public void SaveandCheck() {
+    	this.SaveBtn.click();
+    	System.out.println(this.Deletesuccessmsg.getText());
+    }
+    
+    public void GetQtyAfter() {
+    	System.out.println("Qty after editing"+" = "+ this.gettheqty.getText());
+	}
+    
+    public void deleteMultiProd() throws InterruptedException {
+   	 List<WebElement> Selectcheckbox1 = driver.findElements(By.xpath("//table[@class='table table-bordered table-hover']/tbody/tr"));
+   	 int n1 = Selectcheckbox1.size();
+   	System.out.println("no of records before delete"+" = "+n1);
+   	this.select3rdcheckbox.click();	
+   	this.select4thcheckbox.click();	
+   	this.DeleteBtn.click();
+   		Thread.sleep(5000);
+   		if (driver.switchTo().alert().getText().equals("Are you sure?")) 
+   		{
+   			System.out.println("The delete pop up window has correct text");
+               driver.switchTo().alert().accept();
+   		} else {
+       			System.out.println("U are NOT on delete pop up window");
+       		}
+   		System.out.println(this.Deletesuccessmsg.getText());
+   		List<WebElement> Selectcheckbox2 = driver.findElements(By.xpath("//table[@class='table table-bordered table-hover']/tbody/tr"));
+   		int n2 = Selectcheckbox2.size();
+   		System.out.println("no of records after delete"+" = "+n2); 
+   		}       
+    
+    public void clickCartorders() {
+		Actions act1 = new Actions(driver);
+		act1.moveToElement(CartBtn).build().perform();
+		this.Orders.click();
+	}
+    
+    public void generateInvNum() throws InterruptedException {
+		this.selectViewbtn.click();
+		this.InvoiceBtn.click();
+		Thread.sleep(5000);
+		System.out.println("the invoice number generated"+" = "+this.InvoiceTxt.getText());
+	}
+    
 }  	
 
      

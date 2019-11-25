@@ -46,7 +46,7 @@ public class UNF_simple_Test {
 		driver.quit();
 	}
 	
-  @Test
+  /* @Test
 	public void UNF013Test() {
 		unf_simple_POM.sendUserName("admin");
 		unf_simple_POM.sendPassword("admin@123");
@@ -59,9 +59,9 @@ public class UNF_simple_Test {
 		unf_simple_POM.clickfilterbtn(); 
 		unf_simple_POM.countitems(); 
 		screenShot.captureScreenShot("screenshots/UNF013_filter_results");
-	} 
+	} */
 	
-	   @Test
+	/*   @Test
 	public void UNF014Test() throws InterruptedException {
 		unf_simple_POM.sendUserName("admin");
 		unf_simple_POM.sendPassword("admin@123");
@@ -75,9 +75,9 @@ public class UNF_simple_Test {
 		screenShot.captureScreenShot("screenshots/UNF014_filter_results");
 		unf_simple_POM.deleteProduct();
 		screenShot.captureScreenShot("screenshots/UNF014_after_del_results");
-	} 
+	} */
 	
-	@Test
+	/*   @Test
 	public void UNF015Test() {
 		unf_simple_POM.sendUserName("admin");
 		unf_simple_POM.sendPassword("admin@123");
@@ -93,7 +93,48 @@ public class UNF_simple_Test {
 		unf_simple_POM.filterbtn();
 		unf_simple_POM.itemscount();
 		screenShot.captureScreenShot("screenshots/UNF015_filter_results2");
+	} */
+	
+	@Test
+	public void UNF043Test() {
+		unf_simple_POM.sendUserName("admin");
+		unf_simple_POM.sendPassword("admin@123");
+		unf_simple_POM.clickLoginBtn(); 
+		unf_simple_POM.clickProducts();
+		unf_simple_POM.GetQty();
+		screenShot.captureScreenShot("screenshots/UNF043_products");
+		unf_simple_POM.clickeditbtn();
+		screenShot.captureScreenShot("screenshots/UNF043_editproduct");
+		unf_simple_POM.editqty("100");
+		screenShot.captureScreenShot("screenshots/UNF043_editquantity");
+		unf_simple_POM.SaveandCheck();
+		unf_simple_POM.GetQtyAfter();
+		screenShot.captureScreenShot("screenshots/UNF043_checkqtychange");
+		
+	} 
+	
+	 @Test
+	public void UNF044Test() throws InterruptedException {
+		unf_simple_POM.sendUserName("admin");
+		unf_simple_POM.sendPassword("admin@123");
+		unf_simple_POM.clickLoginBtn(); 
+		unf_simple_POM.clickProducts();
+		unf_simple_POM.enterproductname("SOCKS");
+		unf_simple_POM.clickfilterbtn(); 
+		screenShot.captureScreenShot("screenshots/UNF044_filter_results");
+		unf_simple_POM.deleteMultiProd();
 	}
+	
+	@Test
+	public void UNF045Test() throws InterruptedException {
+		unf_simple_POM.sendUserName("admin");
+		unf_simple_POM.sendPassword("admin@123");
+		unf_simple_POM.clickLoginBtn(); 
+		unf_simple_POM.clickCartorders(); 
+		screenShot.captureScreenShot("screenshots/UNF045_CartOrders_result");
+		unf_simple_POM.generateInvNum(); 
+		screenShot.captureScreenShot("screenshots/UNF045_GenInvNum");
+	}	
 
 }
 
