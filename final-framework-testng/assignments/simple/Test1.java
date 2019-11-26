@@ -17,6 +17,6 @@ public class Test1
 	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	  driver.get("http://magento.com");
 	  driver.findElement(By.className("fa-user")).click();
-	  driver.quit();
+	  //driver.quit();
   }
 }
